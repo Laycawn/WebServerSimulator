@@ -1,0 +1,11 @@
+{
+  "name": "assignment1",
+  "version": "1.0.0",
+  "description": "WEB700 Assignment 1",
+  "main": "assignment1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Olalekan Jimoh",
+  "license": "ISC"
+}
