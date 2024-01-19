@@ -29,7 +29,6 @@ console.log(httpRequest("GET", "/contact")); // Should return "200: Welcome to W
 console.log(httpRequest("GET", "/about")); // Should return "200: This assignment was prepared by Olalekan Jimoh"
 
 
-
 // Additional arrays for testing
 var testVerbs = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"];
 var testPaths = ["/", "/about", "/contact", "/login", "/panel", "/logout", "/invalid", "/test"];
@@ -39,16 +38,26 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-// Function to automate tests
+// Function to automate tests with truncation after a set number of tries
 function automateTests() {
+    var testCount = 0;
+    var maxTests = 10; // Set the maximum number of tests here
+
     function randomRequest() {
+        if (testCount >= maxTests) {
+            clearInterval(testInterval);
+            console.log('Automated testing completed.');
+            return;
+        }
+
         var randomVerb = testVerbs[getRandomInt(testVerbs.length)];
         var randomPath = testPaths[getRandomInt(testPaths.length)];
         var response = httpRequest(randomVerb, randomPath);
         console.log(`Request: ${randomVerb} ${randomPath} - Response: ${response}`);
+        testCount++;
     }
 
-    setInterval(randomRequest, 1000); // Calls randomRequest every second
+    var testInterval = setInterval(randomRequest, 1000); // Calls randomRequest every second
 }
 
 // Running automated tests
